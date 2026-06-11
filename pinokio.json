@@ -1,0 +1,12 @@
+{
+  "links": [{
+    "title": "GANTASMO (built theDAW)",
+    "links": [{
+      "title": "Github",
+      "value": "https://github.com/gantasmo"
+    }, {
+      "title": "Repository",
+      "value": "https://github.com/gantasmo/stabledaw"
+    }]
+  }]
+}
