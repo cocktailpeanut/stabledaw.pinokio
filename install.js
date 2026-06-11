@@ -3,6 +3,15 @@ module.exports = {
     bundle: "ai"
   },
   run: [
+    // A leftover app/ without .git is a partial state (e.g. a reset raced a
+    // running server that recreated app/data) — clear it so the clone can run.
+    {
+      when: "{{exists('app') && !exists('app/.git')}}",
+      method: "fs.rm",
+      params: {
+        path: "app"
+      }
+    },
     // Edit this step to customize the git repository to use
     {
       when: "{{!exists('app')}}",

@@ -48,7 +48,9 @@ module.exports = {
           // --host 127.0.0.1 (not the default "localhost"): on macOS Node resolves
           // localhost to IPv6 ::1 only, leaving IPv4 unbound — which breaks
           // Pinokio's https://5173.localhost proxy that forwards to 127.0.0.1.
-          "npx vite --host 127.0.0.1"
+          // --config: launcher-folder wrapper around the app's vite.config.ts that
+          // defaults the generation form to the always-installed "small" model.
+          "npx vite --host 127.0.0.1 --config ../../vite.launcher.config.mjs"
         ],
         on: [{
           // Vite prints "Local: http://localhost:5173/"
