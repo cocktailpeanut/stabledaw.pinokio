@@ -1,0 +1,17 @@
+# Pinokio runtime state
+/ENVIRONMENT
+/.pinokio-temp
+/logs/
+/cache/
+
+# Launcher-managed app and downloaded model artifacts
+/app/
+/models/
+
+# Local dependency/cache output
+/node_modules/
+/__pycache__/
+*.py[cod]
+
+# OS/editor noise
+.DS_Store

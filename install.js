@@ -34,11 +34,26 @@ module.exports = {
         path: "app",
         message: [
           // aubio 0.4.9 ships source-only on PyPI (no wheels for any platform) and
-          // needs a C compiler most machines don't have (MSVC on Windows). The app
-          // treats aubio as optional — beat detection falls back to librosa — so
-          // skip it instead of requiring a build toolchain.
+          // needs a C compiler at install time (MSVC on Windows), so it is
+          // excluded from the sync and attempted separately in the next step.
           "uv sync --no-install-package aubio"
         ]
+      }
+    },
+    // Optional: build aubio from source. When it succeeds, Chimera gets native
+    // beat detection (and /api/chimera/mashup, which gates on aubio, stops
+    // returning 503). On machines without a C compiler the build fails, which
+    // is fine: "break": false ignores the error so the install continues, and
+    // the app falls back to librosa for beat detection.
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: "uv pip install aubio",
+        on: [{
+          "event": "/error:/i",
+          "break": false
+        }]
       }
     },
     // Frontend dependencies (package-lock.json is committed, npm ci reproduces it exactly)
